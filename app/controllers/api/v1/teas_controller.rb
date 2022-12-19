@@ -14,7 +14,7 @@ class Api::V1::TeasController < ApplicationController
   end
 
   def destroy
-    tea = tea.find_by(id: params[:id])
+    tea = Tea.find_by(id: params[:id])
     tea.destroy
   end
 

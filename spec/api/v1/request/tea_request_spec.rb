@@ -56,7 +56,7 @@ RSpec.describe 'Subscriptions Api' do
           expect(teas[0][:attributes][:brew_time]).to be_an Integer
         end 
 
-      xit 'it deletes a tea' do
+      it 'it deletes a tea' do
         tea = Tea.create!(name: "Green Tea", description: "Green tea is a great source of antioxidants, can be uses to relieve headaches, promote weightloss, and help with digestive issues.", temp:150, brew_time: 3)
         
         expect{ delete "/api/v1/teas/#{tea.id}"}.to change(Tea, :count).by(-1)
