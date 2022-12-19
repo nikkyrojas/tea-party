@@ -35,7 +35,7 @@ RSpec.describe 'Subscription Api' do
         expect(new_subscription.frequency).to eq("weekly")
       end 
       
-      xit 'response is successful for retrieving all subscriptions' do
+      it 'response is successful for retrieving all subscriptions' do
         jolie_green_tea_sub
         jolie_manzanilla_tea_sub      
 

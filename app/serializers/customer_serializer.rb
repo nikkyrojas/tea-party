@@ -3,7 +3,7 @@ class CustomerSerializer
     {
       data:{
         id: "#{new_customer.id}",
-        type: "customers",
+        type: "customer",
         attributes: {
           first_name: new_customer.first_name,
           last_name: new_customer.last_name,
