@@ -35,12 +35,11 @@ RSpec.describe 'Subscription Api' do
         expect(new_subscription.frequency).to eq("weekly")
       end 
       
-      xit 'response is successful for retrieving all subscriptions' do
+      it 'response is successful for retrieving all subscriptions' do
         jolie_green_tea_sub
         jolie_manzanilla_tea_sub      
 
         get "/api/v1/subscriptions?"
-
         expect(response).to be_successful
         expect(response.status).to eq(200)
 
@@ -52,22 +51,27 @@ RSpec.describe 'Subscription Api' do
         expect(subscriptions[0][:type]).to eq("subscription")
         expect(subscriptions[0][:attributes]).to be_a Hash
         expect(subscriptions[0][:attributes][:title]).to be_a String
+        expect(subscriptions[0][:attributes][:title]).to eq ("Green Tea subscription")
         expect(subscriptions[0][:attributes][:status]).to be_a String
-        expect(subscriptions[0][:attributes][:frequencey]).to be_an String
+        expect(subscriptions[0][:attributes][:status]).to eq ("subscribed")
+
+        expect(subscriptions[0][:attributes][:frequency]).to be_an String
+        expect(subscriptions[0][:attributes][:frequency]).to eq ("monthly")
         expect(subscriptions[0][:attributes][:price]).to be_an Integer
+        expect(subscriptions[0][:attributes][:price]).to eq 15
       end 
 
-      xit 'it deletes a subscription' do
+      it 'it deletes a subscription' do
         subscription1 = jolie_green_tea_sub
         subscription2 = jolie_manzanilla_tea_sub    
-        expect{ delete "/api/v1/subscriptions/#{subscription2.id}"}.to change(subscription, :count).by(-1)
+        expect{ delete "/api/v1/subscriptions/#{subscription2.id}"}.to change(Subscription, :count).by(-1)
         expect(response).to be_successful
         expect(response.status).to eq(204)
       end 
     end
     context 'Edgecase Sad Path', :vcr do
-      xit 'return error if a param is missing for create', :vcr do 
-        fsubscription_params = ({
+      it 'return error if a param is missing for create', :vcr do 
+        subscription_params = ({
                     "title": "Manzanilla subscription",
                     "price": 10,
                     "status": 1,
