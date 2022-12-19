@@ -65,11 +65,11 @@ RSpec.describe 'Subscriptions Api' do
       end 
     end
     context 'Edgecase Sad Path', :vcr do
-      xit 'return error if a param is missing', :vcr do 
+      it 'return error if a param is missing', :vcr do 
         subscription_params = ({
                     "name": "Ginger Tea",
                     "description": "Ginger tea is good for motion sickness relief, eleviate nausea, and may help manage blood pressure ",
-                    "brew_time": "10"
+                    "brew_time": 10
                           })
         headers = {"CONTENT_TYPE" => "application/json"}
 
