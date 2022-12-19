@@ -4,7 +4,7 @@ Rails.application.routes.draw do
       resources :sessions, only: [:create, :index, :destroy]
       resources :customers, only: [:index, :create]
       resources :teas, only: [:index]
-      resources :subscriptions, only: [:create]
+      resources :subscriptions, only: [:create, :index, ]
     end
   end
 end

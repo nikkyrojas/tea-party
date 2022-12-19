@@ -1,4 +1,9 @@
 class Api::V1::SubscriptionsController < ApplicationController
+  def index
+    subs = Subscription.all
+    render json: SubscriptionsSerializer.get_subscriptions(subs), status: 200
+  end
+
   def create
     new_subscription = Subscription.new(subscription_params)
     if new_subscription.save
@@ -7,6 +12,7 @@ class Api::V1::SubscriptionsController < ApplicationController
       render json: { errors: "something went wrong, param may be missing"}, status: 400
     end
   end
+
 
   private 
   def subscription_params

@@ -1,16 +1,15 @@
 class SubscriptionSerializer
-  def self.create_subscription(new_subscription)
+  def self.create_subscription(new_sub)
     {
-      data:{
-        id: "#{new_subscription.id}",
+      data: {
+        id: new_sub.id},
         type: "subscription",
         attributes: {
-          title: new_subscription.title,
-          price: new_subscription.price,
-          status: new_subscription.status,
-          frequency: new_subscription.frequency
+          title: new_sub.title,
+          price: new_sub.price,
+          status: new_sub.status,
+          frequency: new_sub.frequency
         }
       }
-    }
   end
 end
