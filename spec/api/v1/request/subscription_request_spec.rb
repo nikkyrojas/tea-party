@@ -70,8 +70,8 @@ RSpec.describe 'Subscription Api' do
       end 
     end
     context 'Edgecase Sad Path', :vcr do
-      xit 'return error if a param is missing for create', :vcr do 
-        fsubscription_params = ({
+      it 'return error if a param is missing for create', :vcr do 
+        subscription_params = ({
                     "title": "Manzanilla subscription",
                     "price": 10,
                     "status": 1,
