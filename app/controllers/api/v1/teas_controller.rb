@@ -1,7 +1,7 @@
 class Api::V1::TeasController < ApplicationController
   def index
     teas = Tea.all
-    render json: TeasSerializer.get_teas(teas), status: 200
+    render json: TeaSerializer.get_teas(teas), status: 200
   end
 
   def create

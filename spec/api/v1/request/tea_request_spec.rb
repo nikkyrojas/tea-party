@@ -28,7 +28,7 @@ RSpec.describe 'Subscriptions Api' do
         expect(new_tea.brew_time).to eq(6)
       end 
       
-      xit 'response is successful for retrieving all teas' do
+      it 'response is successful for retrieving all teas' do
           tea_params = ({
                       "name": "Manzanilla Tea",
                       "description": "Manzanilla (Chamomile Tea) is used for medicinal purposes like: calming upset stomach, anxiety reducer, sleep improvement, ect.",
