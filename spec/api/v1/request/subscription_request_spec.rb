@@ -2,12 +2,12 @@ require 'rails_helper'
 
 RSpec.describe 'Subscription Api' do
   describe 'subscription request endpoint' do
-    let (:green_tea) Tea.create!(name: "Green Tea", describe: "Green tea is a great source of antioxidants, can be uses to relieve headaches, promote weightloss, and help with digestive issues.", temp:150, brew_time: 3)
-    let (:manzanilla_tea) Tea.create!(name: "Manzanilla Tea", describe: "Manzanilla (Chamomile Tea) is used for medicinal purposes like: calming upset stomach, anxiety reducer, sleep improvement, ect.", temp:213, brew_time: 6)
-    let (:mike) Customer.create!(first_name: "Mike", last_name: "Jones", email: "mikej@email.com", address: "2345 Some Street, CO")
-    let (:jolie) Customer.create!(first_name: "Jolie", last_name: "Jones", email: "joliej@email.com", address: "2345 Another Street, CO")
-    let (:jolie_green_tea_sub).create!(title: "Green Tea subscription", price: "15", status:1, frequency:2, tea_id: green_tea.id, customer_id:jolie.id)
-    let (:jolie_manzanilla_tea_sub).create!(title: "Manzanilla Tea subscription", price: "12", status:1, frequency:2, tea_id: manzanilla_tea.id, customer_id:jolie.id)
+    let(:green_tea) {Tea.create!(name: "Green Tea", description: "Green tea is a great source of antioxidants, can be uses to relieve headaches, promote weightloss, and help with digestive issues.", temp:150, brew_time: 3)}
+    let(:manzanilla_tea) {Tea.create!(name: "Manzanilla Tea", description: "Manzanilla (Chamomile Tea) is used for medicinal purposes like: calming upset stomach, anxiety reducer, sleep improvement, ect.", temp:213, brew_time: 6)}
+    let(:mike) {Customer.create!(first_name: "Mike", last_name: "Jones", email: "mikej@email.com", address: "2345 Some Street, CO")}
+    let(:jolie) {Customer.create!(first_name: "Jolie", last_name: "Jones", email: "joliej@email.com", address: "2345 Another Street, CO")}
+    let(:jolie_green_tea_sub) {Subscription.create!(title: "Green Tea subscription", price: "15", status:1, frequency:2, tea_id: green_tea.id, customer_id:jolie.id)}
+    let(:jolie_manzanilla_tea_sub) {Subscription.create!(title: "Manzanilla Tea subscription", price: "12", status:1, frequency:2, tea_id: manzanilla_tea.id, customer_id:jolie.id)}
     context 'Happy Path', :vcr do
       it 'response is successful for creating a subscription' do 
         subscription_params = ({
@@ -30,9 +30,9 @@ RSpec.describe 'Subscription Api' do
 
         expect(json_response).to be_a Hash
         expect(new_subscription.title).to eq("Manzanilla subscription")
-        expect(new_subscription.price.to eq(10)
-        expect(new_subscription.status.to eq("subscribed")
-        expect(new_subscription.frequency.to eq("weekly")
+        expect(new_subscription.price).to eq(10)
+        expect(new_subscription.status).to eq("subscribed")
+        expect(new_subscription.frequency).to eq("weekly")
       end 
       
       xit 'response is successful for retrieving all subscriptions' do
