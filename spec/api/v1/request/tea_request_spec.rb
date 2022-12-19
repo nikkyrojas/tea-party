@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Subscriptions Api' do
   describe 'tea request endpoint' do
-    let (:Green_tea) Tea.create!(name: "Green Tea", describe: "Green tea is a great source of antioxidants, can be uses to relieve headaches, promote weightloss, and help with digestive issues.", temp:150, brew_time: 3)
+    let (:Green_tea) {Tea.create!(name: "Green Tea", describe: "Green tea is a great source of antioxidants, can be uses to relieve headaches, promote weightloss, and help with digestive issues.", temp:150, brew_time: 3)}
     context 'Happy Path', :vcr do
       it 'response is successful for creating a tea' do 
         Green_tea
