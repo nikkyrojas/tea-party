@@ -1,7 +1,7 @@
 class Api::V1::SubscriptionsController < ApplicationController
   def index
     subs = Subscription.all
-    render json: SubscriptionsSerializer.get_subscriptions(subs), status: 200
+    render json: SubscriptionSerializer.get_subscriptions(subs), status: 200
   end
 
   def create

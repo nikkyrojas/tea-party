@@ -2,15 +2,15 @@ require 'rails_helper'
 
 RSpec.describe 'Subscriptions Api' do
   describe 'tea request endpoint' do
-    let (:Green_tea) {Tea.create!(name: "Green Tea", describe: "Green tea is a great source of antioxidants, can be uses to relieve headaches, promote weightloss, and help with digestive issues.", temp:150, brew_time: 3)}
+    let (:green_tea) {Tea.create!(name: "Green Tea", description: "Green tea is a great source of antioxidants, can be uses to relieve headaches, promote weightloss, and help with digestive issues.", temp:150, brew_time: 3)}
     context 'Happy Path', :vcr do
       it 'response is successful for creating a tea' do 
-        Green_tea
+        green_tea
         tea_params = ({
                     "name": "Manzanilla Tea",
                     "description": "Manzanilla (Chamomile Tea) is used for medicinal purposes such as : calming upset stomach, anxiety reducer, sleep improement, cect.",
-                    "temp": "212",
-                    "brew_time": "6"
+                    "temp": 212,
+                    "brew_time": 6
                           })
         headers = {"CONTENT_TYPE" => "application/json"}
         post "/api/v1/teas", headers: headers, params: JSON.generate(tea_params)
@@ -20,7 +20,7 @@ RSpec.describe 'Subscriptions Api' do
 
         json_response = JSON.parse(response.body)
         
-        new_tea = tea.last
+        new_tea = Tea.last
         expect(json_response).to be_a Hash
         expect(new_tea.name).to eq("Manzanilla Tea")
         expect(new_tea.name).to_not eq("Green Tea")
@@ -28,12 +28,12 @@ RSpec.describe 'Subscriptions Api' do
         expect(new_tea.brew_time).to eq(6)
       end 
       
-      xit 'response is successful for retrieving all teas' do
+      it 'response is successful for retrieving all teas' do
           tea_params = ({
                       "name": "Manzanilla Tea",
                       "description": "Manzanilla (Chamomile Tea) is used for medicinal purposes like: calming upset stomach, anxiety reducer, sleep improvement, ect.",
-                      "temp": "212",
-                      "brew_time": "6"
+                      "temp": 212,
+                      "brew_time": 6
                             })
           headers = {"CONTENT_TYPE" => "application/json"}
           post "/api/v1/teas", headers: headers, params: JSON.generate(tea_params)
@@ -56,8 +56,8 @@ RSpec.describe 'Subscriptions Api' do
           expect(teas[0][:attributes][:brew_time]).to be_an Integer
         end 
 
-      xit 'it deletes a tea' do
-        tea = Tea.create!(name: "Green Tea", describe: "Green tea is a great source of antioxidants, can be uses to relieve headaches, promote weightloss, and help with digestive issues.", temp:150, brew_time: 3)
+      it 'it deletes a tea' do
+        tea = Tea.create!(name: "Green Tea", description: "Green tea is a great source of antioxidants, can be uses to relieve headaches, promote weightloss, and help with digestive issues.", temp:150, brew_time: 3)
         
         expect{ delete "/api/v1/teas/#{tea.id}"}.to change(Tea, :count).by(-1)
         expect(response).to be_successful
@@ -65,11 +65,11 @@ RSpec.describe 'Subscriptions Api' do
       end 
     end
     context 'Edgecase Sad Path', :vcr do
-      xit 'return error if a param is missing', :vcr do 
+      it 'return error if a param is missing', :vcr do 
         subscription_params = ({
                     "name": "Ginger Tea",
                     "description": "Ginger tea is good for motion sickness relief, eleviate nausea, and may help manage blood pressure ",
-                    "brew_time": "10"
+                    "brew_time": 10
                           })
         headers = {"CONTENT_TYPE" => "application/json"}
 
