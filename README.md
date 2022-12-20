@@ -6,7 +6,7 @@
 <img src="https://user-images.githubusercontent.com/103013480/208700815-97e60cfe-830a-4bf6-9028-186174396dea.png" alt="tea-cup-icon" width="250" /> </div>
 Do you love Tea? Well, Tea Party is the place for you! Subscribe to multiple tea subscriptions here! 
 
-The Back End application is an API that exposes endpoints to the Front End for an app that will allow customers to subscribe to different teas. The attributed are set up so that a customer can choose how frequent the expect to recieve their tea the subscribed for.  
+The Back End application is an API that exposes endpoints to the Front End for an app that will allow customers to subscribe to different teas. The attributes are set up so that a customer can choose how frequent they expect to recieve their tea they want to subscribe to.  
 
 <a name="readme-top"></a>
 
