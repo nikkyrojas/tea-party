@@ -75,7 +75,7 @@ Once cloned, run the following commands:
 <h4 id="create-customer">Create Customer</h4>
 
 ```javascript
-enpoint; Post /api/v1/customers
+endpoint; Post /api/v1/customers
 {
   "first_name": "Nikky",
   "last_name": "Ro",
@@ -104,7 +104,7 @@ sample response
 <h4 id = "create-tea">Create Tea</h4>
 
 ```javascript
-enpoint; post /api/v1/teas
+endpoint; Post /api/v1/teas
 {
     "name": "Ginger Tea",
     "description": "Ginger tea is good for motion sickness relief, eleviate nausea, and may help manage blood pressure ",
@@ -133,7 +133,7 @@ sample response
 <h4 id = "all-teas">All Teas</h4>
 
 ```javascript
-enpoint; Get /api/v1/teas
+endpoint; Get /api/v1/teas
 
 ```
 
@@ -169,7 +169,7 @@ sample response
 <h4 id = "delete-tea">Delete Tea by ID</h4>
 
 ```javascript
-enpoint; Delete /api/v1/teas/:tea_id
+endpoint; Delete /api/v1/teas/:tea_id
 ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -177,7 +177,7 @@ enpoint; Delete /api/v1/teas/:tea_id
 <h4 id = "subscribe">Tea Subscription</h4>
 
 ```javascript
-enpoint; Post api/v1/subscriptions
+endpoint; Post api/v1/subscriptions
 {
   "title": "Manzanilla subscription",
   "price": 10,
@@ -208,7 +208,7 @@ response
 <h4 id = "all-subs">All Subscription</h4>
 
 ```javascript
-enpoint; Get /api/v1/subscriptions
+endpoint; Get /api/v1/subscriptions
 
 ```
 
@@ -244,7 +244,7 @@ response
 <h4 id = "sub-deletes">Delete Subscription by ID</h4>
 
 ```javascript
-enpoint; Delete /api/v1/subscriptions/:subscription_id 
+endpoint; Delete /api/v1/subscriptions/:subscription_id 
 
 ```
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
