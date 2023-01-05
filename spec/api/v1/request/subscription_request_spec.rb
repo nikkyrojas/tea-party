@@ -4,8 +4,8 @@ RSpec.describe 'Subscription Api' do
   describe 'subscription request endpoint' do
     let(:green_tea) {Tea.create!(name: "Green Tea", description: "Green tea is a great source of antioxidants, can be uses to relieve headaches, promote weightloss, and help with digestive issues.", temp:150, brew_time: 3)}
     let(:manzanilla_tea) {Tea.create!(name: "Manzanilla Tea", description: "Manzanilla (Chamomile Tea) is used for medicinal purposes like: calming upset stomach, anxiety reducer, sleep improvement, ect.", temp:213, brew_time: 6)}
-    let(:mike) {Customer.create!(first_name: "Mike", last_name: "Jones", email: "mikej@email.com", address: "2345 Some Street, CO")}
-    let(:jolie) {Customer.create!(first_name: "Jolie", last_name: "Jones", email: "joliej@email.com", address: "2345 Another Street, CO")}
+    let(:mike) {Customer.create!(first_name: "Mike", last_name: "Jones", email: "mikej@email.com", address: "2345 Some Street, CO", password:"12345", password_confirmation: "12345")}
+    let(:jolie) {Customer.create!(first_name: "Jolie", last_name: "Jones", email: "joliej@email.com", address: "2345 Another Street, CO", password:"12345", password_confirmation: "12345")}
     let(:jolie_green_tea_sub) {Subscription.create!(title: "Green Tea subscription", price: "15", status:1, frequency:2, tea_id: green_tea.id, customer_id:jolie.id)}
     let(:jolie_manzanilla_tea_sub) {Subscription.create!(title: "Manzanilla Tea subscription", price: "12", status:1, frequency:2, tea_id: manzanilla_tea.id, customer_id:jolie.id)}
     context 'Happy Path', :vcr do
@@ -20,7 +20,6 @@ RSpec.describe 'Subscription Api' do
                           })
         headers = {"CONTENT_TYPE" => "application/json"}
         post "/api/v1/subscriptions", headers: headers, params: JSON.generate(subscription_params)
-
         expect(response).to be_successful
         expect(response.status).to eq(201)
 
@@ -63,12 +62,31 @@ RSpec.describe 'Subscription Api' do
 
       it 'it deletes a subscription' do
         subscription1 = jolie_green_tea_sub
-        subscription2 = jolie_manzanilla_tea_sub    
+        subscription2 = jolie_manzanilla_tea_sub
+        get "/api/v1/subscriptions?"
         expect{ delete "/api/v1/subscriptions/#{subscription2.id}"}.to change(Subscription, :count).by(-1)
         expect(response).to be_successful
         expect(response.status).to eq(204)
       end 
+
+      it 'it updates subscription to unsubscribed' do
+        subscription1 = jolie_green_tea_sub
+        subscription2 = jolie_manzanilla_tea_sub
+        expect(subscription2.status). to eq("subscribed")
+        subscription_params = ({
+                    "title": "Manzanilla subscription",
+                    "status": 0
+                          })
+
+        headers = {"CONTENT_TYPE" => "application/json"}
+        patch "/api/v1/subscriptions/#{subscription2.id}", headers: headers, params: JSON.generate(subscription_params)
+        subscription = Subscription.last
+        expect(response).to be_successful
+        expect(response.status).to eq(200)
+        expect(subscription.status). to eq("unsubscribed")
+      end 
     end
+
     context 'Edgecase Sad Path', :vcr do
       it 'return error if a param is missing for create', :vcr do 
         subscription_params = ({

@@ -13,6 +13,12 @@ class Api::V1::SubscriptionsController < ApplicationController
     end
   end
 
+  def update
+    subscription = Subscription.find(params[:id])
+		subscription.update!(subscription_params)
+		render json: subscription
+  end
+
   def destroy
     sub = Subscription.find_by(id: params[:id])
     sub.destroy
