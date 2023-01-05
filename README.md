@@ -246,7 +246,7 @@ response
 <h4 id = "customer-subs">All Customer Subscriptions</h4>
 
 ```javascript
-endpoint; Get /api/v1/customer/:id
+endpoint; Get /api/v1/customers/:id
 
 ```
 
