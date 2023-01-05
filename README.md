@@ -68,6 +68,8 @@ Once cloned, run the following commands:
     <li><a href="#delete-tea">Delete Tea by ID</a></li>
     <li><a href="#subscribe">Tea Subscription</a></li>
     <li><a href="#all-subs">All Subscriptions</a></li>
+    <li><a href="#customer-subs ">All Subscriptions for Customer</a></li>
+    <li><a href="#update-subs ">Unsubscribe/Update Subscription</a></li>
     <li><a href="#sub-deletes">Delete Subscription by ID</a></li>
   </ol>
 </details>
@@ -205,7 +207,7 @@ response
 ```
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<h4 id = "all-subs">All Subscription</h4>
+<h4 id = "all-subs">All Subscriptions</h4>
 
 ```javascript
 endpoint; Get /api/v1/subscriptions
@@ -237,6 +239,73 @@ response
             }
         }
     ]
+}
+```
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<h4 id = "customer-subs">All Customer Subscriptions</h4>
+
+```javascript
+endpoint; Get /api/v1/customer/:id
+
+```
+
+```javascript
+response
+{
+    "data": [
+        {
+            "id": 2,
+            "type": "subscription",
+            "attributes": {
+                "title": "Manzanilla subscription",
+                "price": 10,
+                "status": "subscribed",
+                "frequency": "weekly"
+            }
+        },
+        {
+            "id": 4,
+            "type": "subscription",
+            "attributes": {
+                "title": "Ginger tea subscription",
+                "price": 10,
+                "status": "unsubscribed",
+                "frequency": "monthly"
+            }
+        }
+    ]
+}
+```
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<h4 id = "update-subs">Unsubscribe/Update Subscription</h4>
+
+```javascript
+endpoint; Patch /api/v1/subscriptions/:id
+
+```
+
+```javascript
+body:
+
+{
+"title": "Manzanilla subscription",
+"status": 0
+}
+
+response:
+
+{
+    "id": 2,
+    "title": "Manzanilla subscription",
+    "status": "subscribed",
+    "price": 10,
+    "frequency": "weekly",
+    "customer_id": 1,
+    "tea_id": 1,
+    "created_at": "2022-12-20T15:58:46.523Z",
+    "updated_at": "2023-01-05T19:07:57.117Z"
 }
 ```
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
